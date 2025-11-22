@@ -1,0 +1,13 @@
+{% extends "layout.html" %}
+
+{% block title %}
+Logout Page - DailyMuse
+{% endblock %}
+
+{% block content %}
+<div class="container-logout m-5">
+    <h3>You Have Been Logged Out !!!</h3>
+    <p>Login Again ! <a href="{% url "login" %}">Login!!</a></p>
+</div>
+
+{% endblock %}

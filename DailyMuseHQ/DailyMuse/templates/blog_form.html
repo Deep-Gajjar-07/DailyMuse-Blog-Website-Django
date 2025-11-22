@@ -1,0 +1,28 @@
+{% extends "layout.html" %}
+
+{% block title %}
+{% if form.instance.pk %}
+Edit A Blog - DailyMuse 
+{% else %}
+
+Create A Blog - DailyMuse 
+{% endif %}
+{% endblock %}
+
+{% block content %}
+
+{% if form.instance.pk %}
+<h2 class="m-5">Edit A Blog : </h2>
+{% else %}
+<h2 class="m-5">Create A New Blog : </h2>
+{% endif %}
+
+<form method="post">
+    {% csrf_token %}
+    <div class="mx-4 form">
+        {{form}}
+    </div>
+    <button type="submit" class="mx-5 mt-4 btn btn-success">Add A Blog</button>
+</form>
+
+{% endblock %}

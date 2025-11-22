@@ -1,0 +1,36 @@
+{% extends "layout.html" %}
+
+{% block title %}
+My Blogs - DailyMuse
+{% endblock %}
+
+{% block content %}
+
+{% if my_blogs %}
+
+{% for blogs in my_blogs  %}
+
+    <div class="container-card mb-2 mt-4 mx-5">
+        <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">{{blogs.title}}</h5>
+            <p class="fs-6 text-body-secondary">by {{blogs.user}} <br> On {{blogs.created_at}}</p>
+            <hr>
+            <p class="card-text">{{blogs.blog_text}}</p>
+            {% if blogs.user == user %}
+                <a href="{% url 'edit_blog' blogs.id %}"><i class="fa-solid fa-pencil" style="color: #ebe6e6ff;"></i></a>
+                <a href="{% url "delete_blog" blogs.id %}"><i class="fa-solid fa-trash mx-4" style="color: #ff0000ff;"></i></a>
+            {% endif %}
+        </div>
+        </div>
+    </div>
+
+{% endfor %}
+
+{% else %}
+
+<h5 class="text-center mt-5">No Blogs Result Found! Time To Write Some Write Blogs!!!</h5>
+
+{% endif %}
+
+{% endblock %}

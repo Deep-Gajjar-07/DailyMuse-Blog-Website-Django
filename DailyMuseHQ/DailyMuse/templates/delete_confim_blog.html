@@ -1,0 +1,21 @@
+{% extends "layout.html" %}
+
+{% block title %}
+Delete Blog Confirm - DailyMuse
+{% endblock %}
+
+{% block content %}
+
+<div class="m-5 container-delete">
+    
+    <h3>Are You Sure Want To Delete Blog ?</h3>
+
+    <form method="post">
+        {% csrf_token %}
+        <button class="btn btn-danger">Delete</button>
+        <a href="{% url "homepage" %}" class="btn btn-dark">Cancel</a>
+    </form>
+
+</div>
+
+{% endblock %}
