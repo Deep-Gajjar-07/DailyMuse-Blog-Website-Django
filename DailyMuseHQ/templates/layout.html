@@ -1,6 +1,6 @@
 {% load static %}
 <!DOCTYPE html>
-<html lang="en" data-bs-theme="dark">
+<html lang="en" data-bs-theme="{{request.COOKIES.theme|default:"dark"}}">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -39,7 +39,7 @@
           </li>
           {% else %}
           <li class="nav-item">
-            <a class="nav-link text-white" href="{% url "login" %}">Login</a>
+            <a class="nav-link active" href="{% url "login" %}">Login</a>
           </li>
         {% endif %}
       </ul>
@@ -50,6 +50,8 @@
         Welcome To DailyMuse!
         {% endif %}
       </span>
+      
+      <button class="mx-3 bg-transparent border-0" id="toggle-theme" ><i class="fa-solid fa-xl fa-circle-half-stroke"></i></button>
     </div>
   </div>
 </nav>
@@ -57,6 +59,23 @@
     {% block content %}
     
     {% endblock %}
+
+    {% comment %} javascript code for website mode (Dark|light) {% endcomment %}
+    <script>
+      const btn = document.getElementById('toggle-theme');
+      const html = document.documentElement;
+
+      btn.addEventListener('click', () => {
+        const current = html.getAttribute('data-bs-theme') || 'dark';
+        const next = current === 'light' ? 'dark' : 'light';
+
+        html.setAttribute('data-bs-theme', next);
+
+        // save in cookie to read 
+        document.cookie = `theme=${next};path=/;max-age=31536000`;
+      });
+
+    </script>
 
 </body>
 </html>
