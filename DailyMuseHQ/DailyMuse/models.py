@@ -6,7 +6,7 @@ from django.utils import timezone
 
 class Blog(models.Model):
     user = models.ForeignKey(User,on_delete=models.CASCADE)
-    title = models.CharField(default='Defult Title')
+    title = models.CharField()
     blog_text = models.TextField()
     created_at = models.DateField(default=timezone.now)
     updated_at = models.DateField(auto_now=True)

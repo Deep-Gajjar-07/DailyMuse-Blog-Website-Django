@@ -11,18 +11,21 @@ Create A Blog - DailyMuse
 
 {% block content %}
 
-{% if form.instance.pk %}
-<h2 class="m-5">Edit A Blog : </h2>
-{% else %}
-<h2 class="m-5">Create A New Blog : </h2>
-{% endif %}
-
-<form method="post">
-    {% csrf_token %}
-    <div class="mx-4 form">
-        {{form}}
+<div class="d-flex-justify-content-center card p-3 m-5">
+    {% if form.instance.pk %}
+        <h2 class="m-5">Edit A Blog : </h2>
+    {% else %}
+        <h2 class="m-5">Create A New Blog : </h2>
+    {% endif %}
+    <div class="mx-5">
+        <div class="form form-group">
+            <form method="post">
+                {% csrf_token %}
+                    {{form}}
+                <button type="submit" class="mx-5 mt-4 btn btn-success">Add A Blog</button>
+            </form>
+        </div>
     </div>
-    <button type="submit" class="mx-5 mt-4 btn btn-success">Add A Blog</button>
-</form>
+</div>
 
 {% endblock %}
