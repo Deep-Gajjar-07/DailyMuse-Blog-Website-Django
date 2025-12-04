@@ -12,6 +12,7 @@ def blogs(request):
 
 @login_required
 def create_blog(request):
+    form_class = BlogForm
     if request.method == "POST":
         form = BlogForm(request.POST)
         if form.is_valid():
@@ -51,6 +52,7 @@ def delete_blog(request,blog_id):
     return render(request,'delete_confim_blog.html',{'blog':blog})
 
 def register(request):
+    form_class = UserRegistrationForm
     if request.method == 'POST':
         form = UserRegistrationForm(request.POST)
         if form.is_valid():

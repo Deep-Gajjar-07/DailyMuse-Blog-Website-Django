@@ -14,11 +14,11 @@ Home Page - DailyMuse
         <div class="card">
         <div class="card-body">
             <h5 class="card-title">{{blog.title}}</h5>
-            <p class="fs-6 text-body-secondary">by {{blog.user}} <br> On {{blog.created_at}}</p>
+            <p class="fs-6 text-body-secondary">by {{blog.user}} • On {{blog.created_at}}</p>
             <hr>
             <p class="card-text">{{blog.blog_text}}</p>
             {% if blog.user == user %}
-                <a href="{% url 'edit_blog' blog.id %}"><i class="fa-solid fa-pencil" style="color: #ebe6e6ff;"></i></a>
+                <a href="{% url 'edit_blog' blog.id %}"><i class="fa-solid fa-pencil" style="color: #9279f8ff;"></i></a>
                 <a href="{% url "delete_blog" blog.id %}"><i class="fa-solid fa-trash mx-4" style="color: #ff0000ff;"></i></a>
             {% endif %}
         </div>
