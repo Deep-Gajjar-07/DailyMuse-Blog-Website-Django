@@ -2,10 +2,10 @@
 
 {% block title %}
 {% if form.instance.pk %}
-Edit A Blog - DailyMuse 
+Edit A Blog | DailyMuse 
 {% else %}
 
-Create A Blog - DailyMuse 
+Create A Blog | DailyMuse 
 {% endif %}
 {% endblock %}
 
@@ -19,7 +19,7 @@ Create A Blog - DailyMuse
     {% endif %}
     <div class="mx-5">
         <div class="form form-group">
-            <form method="post">
+            <form method="post" enctype="multipart/form-data">
                 {% csrf_token %}
                     {{form}}
                 <button type="submit" class="mx-5 mt-4 btn btn-success">Add A Blog</button>

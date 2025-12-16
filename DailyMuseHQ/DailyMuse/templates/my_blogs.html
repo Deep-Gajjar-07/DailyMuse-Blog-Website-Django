@@ -1,36 +1,44 @@
 {% extends "layout.html" %}
 
 {% block title %}
-My Blogs - DailyMuse
+My Blogs | DailyMuse
 {% endblock %}
 
 {% block content %}
 
+<div class="mt-4"></div>
+
 {% if my_blogs %}
 
-{% for blogs in my_blogs  %}
+    {% for blogs in my_blogs  %}
 
-    <div class="container-card mb-2 mt-4 mx-5">
-        <div class="card">
-        <div class="card-body">
-            <h5 class="card-title">{{blogs.title}}</h5>
-            <p class="fs-6 text-body-secondary">by {{blogs.user}} <br> On {{blogs.created_at}}</p>
-            <hr>
-            <p class="card-text">{{blogs.blog_text}}</p>
-            {% if blogs.user == user %}
-                <a href="{% url 'edit_blog' blogs.id %}"><i class="fa-solid fa-pencil" style="color: #ebe6e6ff;"></i></a>
-                <a href="{% url "delete_blog" blogs.id %}"><i class="fa-solid fa-trash mx-4" style="color: #ff0000ff;"></i></a>
-            {% endif %}
+        <div class="d-flex justify-content-center align-items-center">
+            <div class="card mb-3" style="max-width: 80rem;">
+                <div class="row g-0">
+                    <div class="col-md-4">
+                        <img src="{{blogs.image.url}}" style="height: 18rem; width: 50rem;" class="img-fluid rounded" alt="blog-img">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h5 class="card-title">{{blogs.title}}</h5>
+                            {% if blogs.user == user %}
+                                <p class="card-text"><small class="text-body-secondary">by You — On {{blogs.created_at}}</small></p>
+                            {% endif %}
+                            <p class="card-text">{{blogs.blog_text|linebreaks}}</p>
+                            {% if blogs.user == user %}
+                                <a href="{% url 'edit_blog' blogs.id %}"><i class="fa-solid fa-pencil" style="color: #9279f8ff;"></i></a>
+                                <a href="{% url "delete_blog" blogs.id %}"><i class="fa-solid fa-trash mx-4" style="color: #ff0000ff;"></i></a>
+                            {% endif %}
+                    </div>
+                    </div>
+                </div>
+            </div>
         </div>
-        </div>
-    </div>
 
-{% endfor %}
+    {% endfor %}
 
 {% else %}
-
-<h5 class="text-center mt-5">No Blogs Result Found! Time To Write Some Blogs!!!</h5>
-
+    <h5 class="text-center mt-5">No Blogs Result Found! Time To Write Some Blogs!!!</h5>
 {% endif %}
 
 {% endblock %}
