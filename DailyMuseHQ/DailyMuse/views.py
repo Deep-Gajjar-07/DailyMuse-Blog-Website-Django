@@ -11,10 +11,15 @@ def blogs(request):
     return render(request,'blog_list.html',{'blogs':blogs})
 
 @login_required
+def detail_blog(request,blog_id):
+    blog = Blog.objects.get(pk=blog_id)
+    return render(request,'detail_blog.html',{'blog':blog})
+
+@login_required
 def create_blog(request):
     form_class = BlogForm
     if request.method == "POST":
-        form = BlogForm(request.POST)
+        form = BlogForm(request.POST,request.FILES)
         if form.is_valid():
             blog = form.save(commit=False)
             blog.user = request.user
@@ -33,7 +38,7 @@ def my_blogs(request):
 def edit_blog(request,blog_id):
     blog = get_object_or_404(Blog,pk=blog_id,user = request.user)
     if request.method == 'POST':
-        form = BlogForm(request.POST,instance=blog)
+        form = BlogForm(request.POST,request.FILES,instance=blog)
         if form.is_valid():
             blog = form.save(commit=False)
             blog.user = request.user
