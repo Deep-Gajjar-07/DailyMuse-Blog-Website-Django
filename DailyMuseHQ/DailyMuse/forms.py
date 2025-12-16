@@ -6,10 +6,11 @@ from django.contrib.auth.models import User
 class BlogForm(forms.ModelForm):
     class Meta:
         model = Blog
-        fields = ['title','blog_text']
+        fields = ['image','title','blog_text']
 
         # for custom forms for adding a blog!!
         widgets = {
+            'image' : forms.ClearableFileInput(attrs={'class':'form-control'}),
             'title' : forms.TextInput(attrs={'class':'form-control'}),
             'blog_text' : forms.Textarea(attrs={'class':'form-control'})
         }
