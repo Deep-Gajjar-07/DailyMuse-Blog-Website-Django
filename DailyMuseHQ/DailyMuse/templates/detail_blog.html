@@ -29,7 +29,24 @@ Detail Blog | DailyMuse
             </div>
         </div>
     </div>
-
+        
+        {% else %}
+        
+        <div class="d-flex justify-content-center align-items-center mt-5 mb-5">
+            <div class="card mb-3" style="max-width: 80rem;">
+                <div class="card-body">
+                    <h5 class="card-title">{{blog.title}}</h5>
+                    {% if blog.user == user %}
+                    <p class="card-text"><small class="text-body-secondary">by You — On {{blog.created_at}}</small></p>
+                    {% else %}
+                    <p class="card-text"><small class="text-body-secondary">by {{blog.user}} — On {{blog.created_at}}</small></p>
+                    {% endif %}
+                    <p class="card-text">{{blog.blog_text}}</p>
+                    <a href="{% url "homepage" %}"><button class="btn btn-dark">Back To Home</button></a>
+                </div>
+            </div>
+        </div>
+        
 {% endif %}
-
+        
 {% endblock %}

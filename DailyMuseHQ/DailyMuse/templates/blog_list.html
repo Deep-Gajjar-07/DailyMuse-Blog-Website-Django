@@ -10,8 +10,9 @@ Home Page | DailyMuse
 
 <div class="d-flex justify-content-center align-items-center">
     <div class="container row gap-3 mx-4 mt-4 mb-4">
-    {% for blog in blogs  %}
-    <div class="card" style="width: 25rem;">
+{% for blog in blogs  %}
+    {% if blog.image %}
+        <div class="card" style="width: 25rem;">
                 {% if blog.image %}
                     <img src="{{blog.image.url}}" loading="lazy" class="card-img-top" style="height: 15rem;" alt="blog-image">
                 {% endif %}
@@ -28,14 +29,35 @@ Home Page | DailyMuse
                     </p>
                     <p class="card-text">
                         {% if blog.user == user %}
-                            <a href="{% url 'edit_blog' blog.id %}"><i class="fa-solid fa-pencil" style="color: #9279f8ff;"></i></a>
-                            <a href="{% url "delete_blog" blog.id %}"><i class="fa-solid fa-trash mx-4" style="color: #ff0000ff;"></i></a>
+                        <a href="{% url 'edit_blog' blog.id %}"><i class="fa-solid fa-pencil" style="color: #9279f8ff;"></i></a>
+                        <a href="{% url "delete_blog" blog.id %}"><i class="fa-solid fa-trash mx-4" style="color: #ff0000ff;"></i></a>
                         {% endif %}
                     </p>
                 </div>   
+            </div>
+            {% else %}
+            <div class="card" style="width: 25rem;">
+                <div class="card-body">
+                    <h5 class="card-title">{{blog.title}}</h5>
+                    {% if blog.user == user %}
+                    <p class="text-body-secondary">by You • {{blog.created_at}}</p>
+                    {% else %}
+                    <p class="text-body-secondary">by {{blog.user}} • {{blog.created_at}}</p>
+                        {% endif %}
+                        <p class="card-text">{{blog.blog_text|truncatewords:20}}
+                            <a href="{% url 'detail_blog' blog.id %}" class="text-body-secondary">read more</a>
+                        </p>
+                        <p class="card-text">
+                            {% if blog.user == user %}
+                            <a href="{% url 'edit_blog' blog.id %}"><i class="fa-solid fa-pencil" style="color: #9279f8ff;"></i></a>
+                            <a href="{% url "delete_blog" blog.id %}"><i class="fa-solid fa-trash mx-4" style="color: #ff0000ff;"></i></a>
+                            {% endif %}
+                        </p>
+                </div>
         </div>
-        {% endfor %}
-    </div>
+    {% endif %}
+    {% endfor %}
+</div>
 </div>
 
 {% endblock %}
