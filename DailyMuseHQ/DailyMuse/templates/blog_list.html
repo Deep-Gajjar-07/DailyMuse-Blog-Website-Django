@@ -44,7 +44,7 @@ Home Page | DailyMuse
                     {% else %}
                     <p class="text-body-secondary">by {{blog.user}} • {{blog.created_at}}</p>
                         {% endif %}
-                        <p class="card-text">{{blog.blog_text|truncatewords:20}}
+                        <p class="card-text">{{blog.blog_text|truncatewords:50}}
                             <a href="{% url 'detail_blog' blog.id %}" class="text-body-secondary">read more</a>
                         </p>
                         <p class="card-text">

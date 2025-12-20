@@ -41,7 +41,7 @@ Detail Blog | DailyMuse
                     {% else %}
                     <p class="card-text"><small class="text-body-secondary">by {{blog.user}} — On {{blog.created_at}}</small></p>
                     {% endif %}
-                    <p class="card-text">{{blog.blog_text}}</p>
+                    <p class="card-text">{{blog.blog_text|linebreaks}}</p>
                     <a href="{% url "homepage" %}"><button class="btn btn-dark">Back To Home</button></a>
                 </div>
             </div>
