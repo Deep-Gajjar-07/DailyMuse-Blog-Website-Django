@@ -3,6 +3,7 @@ from .models import Blog
 from .forms import BlogForm, UserRegistrationForm
 from django.shortcuts import redirect,get_object_or_404
 from django.contrib.auth.decorators import login_required
+from django.db.models import Q
 
 # Create your views here.
 
@@ -68,3 +69,12 @@ def register(request):
     else:
             form = UserRegistrationForm()
     return render(request,'registration/register.html',{'form':form})
+
+def search_blogs(request):
+    if request.method == "POST":
+        searched = request.POST['searched_blog']
+        blogs = Blog.objects.filter(Q(title__icontains=searched) | Q(user__username__icontains=searched))
+        return render(request,'search_blogs.html',{'blogs':blogs})
+    else:
+        return render(request,'search_blogs.html')
+        
