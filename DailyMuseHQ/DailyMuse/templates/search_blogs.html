@@ -1,0 +1,75 @@
+{% extends "layout.html" %}
+
+{% block title %}
+Search Blog Page | DailyMuse
+{% endblock %}
+
+{% block content %}
+
+{% if blogs %}
+<div class="d-flex justify-content-center align-items-center">
+    <div class="container row gap-3 mx-4 mt-4 mb-4">
+{% for blog in blogs  %}
+    {% if blog.image %}
+        <div class="card" style="width: 25rem;">
+                {% if blog.image %}
+                    <img src="{{blog.image.url}}" loading="lazy" class="card-img-top" style="height: 15rem;" alt="blog-image">
+                {% endif %}
+                <div class="card-body">
+                    <h5 class="card-title">{{blog.title}}</h5>
+                    {% if blog.user == user %}
+                        <p class="text-body-secondary">by You • {{blog.created_at}}</p>
+                    {% else %}
+                        <p class="text-body-secondary">by {{blog.user}} • {{blog.created_at}}</p>
+                    {% endif %}
+                    <hr>
+                    <p class="card-text">{{blog.blog_text|truncatewords:20}}
+                        <a href="{% url 'detail_blog' blog.id %}" class="text-body-secondary">read more</a>
+                    </p>
+                    <p class="card-text">
+                        {% if blog.user == user %}
+                        <a href="{% url 'edit_blog' blog.id %}"><i class="fa-solid fa-pencil" style="color: #9279f8ff;"></i></a>
+                        <a href="{% url "delete_blog" blog.id %}"><i class="fa-solid fa-trash mx-4" style="color: #ff0000ff;"></i></a>
+                        {% endif %}
+                    </p>
+                </div>   
+            </div>
+            {% else %}
+            <div class="card" style="width: 25rem;">
+                <div class="card-body">
+                    <h5 class="card-title">{{blog.title}}</h5>
+                    {% if blog.user == user %}
+                    <p class="text-body-secondary">by You • {{blog.created_at}}</p>
+                    {% else %}
+                    <p class="text-body-secondary">by {{blog.user}} • {{blog.created_at}}</p>
+                        {% endif %}
+                        <p class="card-text">{{blog.blog_text|truncatewords:20}}
+                            <a href="{% url 'detail_blog' blog.id %}" class="text-body-secondary">read more</a>
+                        </p>
+                        <p class="card-text">
+                            {% if blog.user == user %}
+                            <a href="{% url 'edit_blog' blog.id %}"><i class="fa-solid fa-pencil" style="color: #9279f8ff;"></i></a>
+                            <a href="{% url "delete_blog" blog.id %}"><i class="fa-solid fa-trash mx-4" style="color: #ff0000ff;"></i></a>
+                            {% endif %}
+                        </p>
+                </div>
+        </div>
+    {% endif %}
+    {% endfor %}
+</div>
+</div>
+
+{% else %}
+
+{% if request.method == "GET" %}
+    <div class="d-flex justify-content-center align-items-center mt-5">
+        <h4>I Think You Directly Type The Url🤔!! Type Something in Search Box To Get Blogs You Want To Read!!!</h4>
+    </div>
+{% else %}
+    <h4 class="d-flex justify-content-center mt-5">Sorry, Can't Find The Blog or Username Related To Your Search!!</h4>
+{% endif %}
+
+
+{% endif %}
+
+{% endblock %}
