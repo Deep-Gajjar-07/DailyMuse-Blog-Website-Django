@@ -43,9 +43,10 @@
           </li>
         {% endif %}
       </ul>
-      <form class="d-flex mx-4">
-        <input class="form-control me-2" type="search" placeholder="Search Blogs Here..." aria-label="Search"/>
-        <button class="btn btn-info" type="submit">Search</button>
+      <form class="d-flex mx-4" method=POST action={% url 'search_blogs' %}>
+        {% csrf_token %}
+        <input class="form-control me-2" type="search" name="searched_blog" placeholder="Search Blogs or Users Here..." aria-label="Search"/>
+        <button class="btn btn-info" type="submit" >Search</button>
       </form>
       <span class="navbar-text">
         {% if user.is_authenticated %}
