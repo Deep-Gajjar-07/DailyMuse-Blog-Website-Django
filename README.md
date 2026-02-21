@@ -5,9 +5,8 @@ Users can create, edit, delete, and view blog posts — including a personalized
 **My Blogs** page to manage their own content.
 
 ---
-## Tech Stack
-- HTML
-- CSS
+## Tech Stack Used
+
 - Bootstrap 
 - Python
 - Django
